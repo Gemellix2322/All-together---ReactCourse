@@ -2,13 +2,28 @@ import logo from "./logo.svg";
 import { useState } from "react";
 import "./App.css";
 import ListaUsuarios from "./ListaUsuarios";
+import AdicionarUsuarios from "./AdicionarUsuarios";
 
 const App = () => {
   const [usuarios, setUsuarios] = useState([])
 
-  const handleUsuarios = (usuarios) => {
-    setUsuarios([...usuarios, usuarios]);
+  const handleAddUsuario = (novoUsuario) => {
+    setUsuarios([...usuarios, novoUsuario]);
   }
+
+  const handleDelete = (indexToDelete) => {
+    const novaLista = usuarios.filter((_, index) => index !== indexToDelete);
+    setUsuarios(novaLista);
+  }
+
+  const handleIncrementJogo = (indexToIncrement) => {
+    const novaListaUsuarios = usuarios.map((usuario, index) => 
+      index === indexToIncrement 
+        ? {...usuario, jogo: usuario.jogo + 1} 
+        : usuario
+    );
+    setUsuarios(novaListaUsuarios);
+  };
 
   
   return (
@@ -18,9 +33,9 @@ const App = () => {
         <h1 className="App-title">ReactND - Coding Practice</h1>
       </header>
       <div className="container">
-        <AdicionarUsuarios/>
+        <AdicionarUsuarios onAddUsuario={handleAddUsuario}/>
         <h2>Usuários</h2>
-        <ListaUsuarios/>
+        <ListaUsuarios usuarios={usuarios} handleDelete={handleDelete} handleIncrementJogo={handleIncrementJogo}/>
       </div>
     </div>
   );
