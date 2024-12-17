@@ -1,14 +1,12 @@
 
 
-const Usuarios = ({ usuario, onDelete, onIncrementJogo}) => {
+const Usuarios = ({ usuario, onDelete, onIncrementJogo, handleOcultarJogo}) => {
     return (
       <li>
-        <div>
-          <p><strong>Nome:</strong> {usuario.name}</p>
-          <p><strong>Jogo:</strong> {usuario.jogo}</p>
+          <p>{usuario.name} jogou {usuario.jogo} jogos</p>
           <button onClick={onDelete}>Deletar usuario</button>
           <button onClick={onIncrementJogo}>Incrementar Jogos</button>
-        </div>
+          <button onClick={handleOcultarJogo}>Ocultar Jogos</button>
       </li>
     );
   };

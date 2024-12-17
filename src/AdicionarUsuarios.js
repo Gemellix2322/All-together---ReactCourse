@@ -2,24 +2,19 @@ import React, { useState } from "react";
 
 const AdicionarUsuarios = ({ onAddUsuario }) => {
   const [name, setName] = useState("");
-  const [jogo, setJogo] = useState("");
+  const [jogo, setJogo] = useState(0);
 
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
+    onAddUsuario({name, jogo});
+    setName("");
+    setJogo(0);
+  }
 
-    // Validação: "jogo" deve ser um número
-    if (name && !isNaN(jogo)) {
-      const novoUsuario = { name, jogo: Number(jogo) }; // Converte para número
-      onAddUsuario(novoUsuario); // Adiciona o usuário
-      setName(""); // Limpa o campo "name"
-      setJogo(""); // Limpa o campo "jogo"
-    } else {
-      alert("Por favor, digite um nome válido e um número para o jogo.");
-    }
-  };
+  const inputempty = () => name === "";
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <input
         type="text"
         placeholder="Nome do usuário"
@@ -32,7 +27,7 @@ const AdicionarUsuarios = ({ onAddUsuario }) => {
         value={jogo}
         onChange={(e) => setJogo(e.target.value)}
       />
-      <button type="submit">Adicionar Usuário</button>
+      <button disabled={inputempty()} type="submit">Adicionar Usuário</button>
     </form>
   );
 };

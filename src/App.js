@@ -8,8 +8,26 @@ const App = () => {
   const [usuarios, setUsuarios] = useState([])
 
   const handleAddUsuario = (novoUsuario) => {
-    setUsuarios([...usuarios, novoUsuario]);
-  }
+    const nomeJaExiste = usuarios.some(
+      (usuario) => usuario.name.toLowerCase() === novoUsuario.name.toLowerCase()
+    );
+
+    if (nomeJaExiste) {
+      alert("Este nome já foi adicionado! Tente outro.");
+    } else {
+      setUsuarios([...usuarios, novoUsuario]); // Adiciona o usuário
+    }
+  };
+
+  const handleOcultarJogo = (indexToOcultar) => {
+    const novaListaUsuarios = usuarios.map((usuario, index) =>
+      index === indexToOcultar
+        ? { ...usuario, jogo: 0 } // Define "jogo" como 0
+        : usuario
+    );
+    setUsuarios(novaListaUsuarios);
+  };
+
 
   const handleDelete = (indexToDelete) => {
     const novaLista = usuarios.filter((_, index) => index !== indexToDelete);
@@ -35,7 +53,7 @@ const App = () => {
       <div className="container">
         <AdicionarUsuarios onAddUsuario={handleAddUsuario}/>
         <h2>Usuários</h2>
-        <ListaUsuarios usuarios={usuarios} handleDelete={handleDelete} handleIncrementJogo={handleIncrementJogo}/>
+        <ListaUsuarios usuarios={usuarios} handleDelete={handleDelete} handleIncrementJogo={handleIncrementJogo} handleOcultarJogo={handleOcultarJogo}/>
       </div>
     </div>
   );
