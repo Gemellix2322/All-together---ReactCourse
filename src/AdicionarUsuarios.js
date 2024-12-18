@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css";
 
 const AdicionarUsuarios = ({ onAddUsuario }) => {
   const [name, setName] = useState("");
@@ -14,7 +15,8 @@ const AdicionarUsuarios = ({ onAddUsuario }) => {
   const inputempty = () => name === "";
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="usuario-form">
+      <h2>Digite os Usuários</h2>
       <input
         type="text"
         placeholder="Nome do usuário"

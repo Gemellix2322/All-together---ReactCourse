@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import Usuarios from "./Usuarios";
+import "./App.css";
 
 const ListaUsuarios = ({ usuarios, handleDelete, handleIncrementJogo, handleOcultarJogo}) => {
     return (

@@ -12,6 +12,7 @@
   height: 150px;
   padding: 20px;
   color: white;
+  width: 100%;
 }
 
 .App-title {
@@ -30,3 +31,43 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This will center items horizontally */
+  width: 100%;
+  gap: 20px; /* Optional: adds some vertical spacing between elements */
+}
+
+.usuario-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%; /* Full width of container */
+  max-width: 300px; /* Limit max width for better readability */
+  align-items: center; /* Center form elements */
+}
+
+.usuario-form input, 
+.usuario-form button {
+  width: 100%; /* Make inputs and buttons full width of form */
+  box-sizing: border-box; /* Ensures padding doesn't increase width */
+}
+
+h2 {
+  margin: 0 !important; 
+}
+
+.usuarios-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+}
+
+.usuarios-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+

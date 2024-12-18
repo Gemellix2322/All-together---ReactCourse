@@ -11,18 +11,29 @@ const App = () => {
     const nomeJaExiste = usuarios.some(
       (usuario) => usuario.name.toLowerCase() === novoUsuario.name.toLowerCase()
     );
-
+  
     if (nomeJaExiste) {
       alert("Este nome já foi adicionado! Tente outro.");
     } else {
-      setUsuarios([...usuarios, novoUsuario]); // Adiciona o usuário
+      const usuarioComJogo = {
+        ...novoUsuario, 
+        jogo: Number(novoUsuario.jogo) || 0,
+        mostrarJogo: true,
+        jogoOriginal: Number(novoUsuario.jogo) || 0
+      };
+      setUsuarios([...usuarios, usuarioComJogo]); 
     }
   };
 
   const handleOcultarJogo = (indexToOcultar) => {
     const novaListaUsuarios = usuarios.map((usuario, index) =>
       index === indexToOcultar
-        ? { ...usuario, jogo: 0 } // Define "jogo" como 0
+        ? { 
+            ...usuario, 
+            jogo: usuario.mostrarJogo === false ? usuario.jogoOriginal : 0,
+            mostrarJogo: usuario.mostrarJogo === false ? true : false,
+            jogoOriginal: usuario.mostrarJogo === false ? usuario.jogo : usuario.jogoOriginal
+          }
         : usuario
     );
     setUsuarios(novaListaUsuarios);
@@ -37,7 +48,7 @@ const App = () => {
   const handleIncrementJogo = (indexToIncrement) => {
     const novaListaUsuarios = usuarios.map((usuario, index) => 
       index === indexToIncrement 
-        ? {...usuario, jogo: usuario.jogo + 1} 
+        ? {...usuario, jogo: (usuario.jogo || 0) + 1} 
         : usuario
     );
     setUsuarios(novaListaUsuarios);
